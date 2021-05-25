@@ -21,5 +21,16 @@ const functions = {
             },
         ],
     },
+    getUser: {
+        handler: `src/functions/getUser/index.handler`,
+        events: [
+            {
+                http: {
+                    method: 'get',
+                    path: 'user/{userID}',
+                },
+            },
+        ],
+    },
 };
 export default functions;

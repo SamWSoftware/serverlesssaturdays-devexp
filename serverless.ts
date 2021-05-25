@@ -1,5 +1,7 @@
 import type { AWS } from '@serverless/typescript';
 
+import DynamoResources from 'src/serverless/DynamoResources';
+
 import functions from 'src/serverless/functions';
 
 const serverlessConfiguration: AWS = {
@@ -10,8 +12,30 @@ const serverlessConfiguration: AWS = {
             webpackConfig: './webpack.config.js',
             includeModules: true,
         },
+        tables: {
+            userTable: 'my-user-table',
+        },
+        dynamodb: {
+            stages: ['dev'],
+            start: {
+                port: 8005,
+                inMemory: true,
+                migrate: true,
+                seed: true,
+            },
+            seed: {
+                dev: {
+                    sources: [
+                        {
+                            table: '${self:custom.tables.userTable}',
+                            sources: ['src/serverless/seedData/userTable.json'],
+                        },
+                    ],
+                },
+            },
+        },
     },
-    plugins: ['serverless-webpack', 'serverless-offline'],
+    plugins: ['serverless-webpack', 'serverless-offline', 'serverless-dynamodb-local'],
     provider: {
         name: 'aws',
         runtime: 'nodejs14.x',
@@ -28,6 +52,12 @@ const serverlessConfiguration: AWS = {
     },
     // import the function via paths
     functions,
+
+    resources: {
+        Resources: {
+            ...DynamoResources,
+        },
+    },
 };
 
 module.exports = serverlessConfiguration;
