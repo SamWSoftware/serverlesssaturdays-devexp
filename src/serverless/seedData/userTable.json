@@ -1,6 +1,9 @@
 [
     {
         "userID": "1234",
-        "name": "Sam"
+        "name": "Sam",
+        "age": 27,
+        "company": "Complete Coding",
+        "job": "Serverless Wizard"
     }
 ]
