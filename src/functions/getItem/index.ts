@@ -8,10 +8,11 @@ const main = async (event: APIGatewayProxyEvent) => {
 
     const item = itemData[itemID];
 
-    return item ? formatJSONResponse(item) : formatJSONResponse({ message: 'no item found' }, 404);
+    return item ? formatJSONResponse(item) : formatJSONResponse({ message: 'no item found' }, 400);
 };
 
 export const handler = main;
+export default handler;
 
 const itemData = {
     '0001': {

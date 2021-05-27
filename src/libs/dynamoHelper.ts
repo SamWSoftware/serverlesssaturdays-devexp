@@ -104,8 +104,8 @@ const DynamoHelper = {
         rangeMax?: number;
         tableName: string;
     }) => {
-        if (rangeKey && !(rangeMin || rangeMax)) {
-            throw Error('Need a rangeMin or rangeMax when a range key is provided');
+        if (rangeKey && !(rangeMin || rangeMax || rangeValue)) {
+            throw Error('Need a rangeValue, rangeMin or rangeMax when a range key is provided');
         }
 
         const rminExp = rangeMin ? `${rangeKey} > :rvaluemin` : '';
