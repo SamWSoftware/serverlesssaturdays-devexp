@@ -11,7 +11,7 @@ const serverlessConfiguration: AWS = {
             includeModules: true,
         },
     },
-    plugins: ['serverless-webpack', 'serverless-offline'],
+    plugins: ['serverless-webpack'],
     provider: {
         name: 'aws',
         runtime: 'nodejs14.x',
@@ -24,6 +24,10 @@ const serverlessConfiguration: AWS = {
             AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
         },
         lambdaHashingVersion: '20201221',
+    },
+
+    package: {
+        individually: true,
     },
     // import the function via paths
     functions,
