@@ -22,7 +22,6 @@ const serverlessConfiguration: AWS = {
         },
         environment: {
             AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-            userTable: '${self:custom.tables.userTable}',
         },
         lambdaHashingVersion: '20201221',
     },
